@@ -8,21 +8,23 @@ import SignUp from "./pages/SignUp";
 import Post from "./pages/Post";
 import PostView from "./pages/PostView";
 import Footer from "./components/Footer";
-
+import {PostsProvider} from "./context/PostContext";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-          <Header/>
-            <Routes>
-              <Route Component={Home} path='/' />
-              <Route Component={Login} path='/login' />
-              <Route Component={SignUp} path='/signup' />
-              <Route Component={Post} path='/create_post' />
-              <Route Component={PostView} path='/post/:id' />
-            </Routes>
-          <Footer/>
+          <PostsProvider>
+              <Header/>
+                <Routes>
+                  <Route Component={Home} path='/' />
+                  <Route Component={Login} path='/login' />
+                  <Route Component={SignUp} path='/signup' />
+                  <Route Component={Post} path='/create_post' />
+                  <Route Component={PostView} path='/post/:id' />
+                </Routes>
+              <Footer/>
+          </PostsProvider>
       </BrowserRouter>
 
     </div>

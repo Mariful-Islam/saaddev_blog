@@ -1,4 +1,115 @@
 body {
   padding: 0;
   margin: 0;
+  color: gray;
+}
+
+.wrapper {
+  padding: 0 10%;
+
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: 20px
+}
+
+.nav a {
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 7px;
+}
+
+.nav a:hover {
+  color: white;
+  background-color: gray;
+}
+
+.nav a.active {
+  color: white;
+  background-color: gray;
+}
+
+
+/* Form  */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  margin-top: 50px;
+  }
+
+form input {
+    height: 30px;
+    border-radius: 5px;
+    outline: #11e4c1;
+    border: 1px solid #11e4c1;
+    margin: 2px;
+    padding: 0 10px;
+    text-align: start;
+
+  }
+
+  form input:focus {
+    outline: #11e4c1;
+    box-shadow: 0 0 0 0.1rem #11e4c1;
+  }
+
+.response {
+    text-align: center;
+}
+
+.posts {
+
+}
+
+.post_component {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #dedede;
+}
+
+.icon-tabler-trash-filled:hover {
+    color: #ec2525;
+}
+
+.icon-tabler-pencil:hover {
+    color: green;
+}
+
+.post {
+    margin: 20px 0;
+    cursor: default;
+}
+
+.post h3, .post p {
+    margin: 7px 0;
+}
+
+.tag_list {
+    display: flex;
+    gap: 7px;
+}
+
+.tag {
+    background-color: gray;
+    color: white;
+    padding: 2px 5px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper{
+    padding: 0 10px;
+  }
 }
