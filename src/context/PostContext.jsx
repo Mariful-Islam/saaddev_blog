@@ -7,7 +7,7 @@ export default PostsContext
 export const PostsProvider = ({children}) => {
     let [posts, setPosts] = useState([])
     let getPosts = async () => {
-        let response = await fetch('/blog/posts/')
+        let response = await fetch('https://saaddev.pythonanywhere.com/blog/posts/')
         let data = await response.json()
         setPosts(data)
     }

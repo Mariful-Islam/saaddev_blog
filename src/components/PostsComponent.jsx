@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 import PostsContext from "../context/PostContext";
 
 
@@ -19,7 +19,7 @@ const PostsComponent = ({post}) => {
     let [postRes, setPostRes] = useState('')
 
     let deleteHandle = async () => {
-        let response = await fetch(`/blog/post_delete/${post.id}/`, {
+        let response = await fetch(`https://saaddev.pythonanywhere.com/blog/post_delete/${post.id}/`, {
             method: "DELETE",
             headers:{
                 "Content-Type": "application/json"
@@ -31,10 +31,10 @@ const PostsComponent = ({post}) => {
     }
 
     return(
-        <div className='post_component'>
-            <div className='post' onClick={()=>navigate(`/post/${post.id}`)}>
-                <strong style={{fontSize:'0.8rem'}}>@{post.user}</strong><br/>
-                <h2>{post.title}</h2>
+        <div className='post_component' >
+            <div className='post'>
+                <strong style={{fontSize:'0.8rem'}}><Link to={`/profile/${post.user}`}>@{post.user}</Link></strong><br/>
+                <h2><Link to={`/post/${post.id}`}>{post.title}</Link></h2>
                 <p>
                    <div dangerouslySetInnerHTML={desc()} />
                 </p>
@@ -45,7 +45,7 @@ const PostsComponent = ({post}) => {
                     ))}
                 </div>
             </div>
-            <div onClick={deleteHandle}>
+            <div onClick={()=>deleteHandle()}>
                 <svg className="icon icon-tabler icon-tabler-trash-filled" width="24"
                      height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                      stroke-linecap="round" stroke-linejoin="round">

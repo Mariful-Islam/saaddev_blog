@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import Post from "./pages/Post";
 import PostView from "./pages/PostView";
 import Footer from "./components/Footer";
+import Profile from './pages/Profile';
 import {PostsProvider} from "./context/PostContext";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                   <Route Component={SignUp} path='/signup' />
                   <Route Component={Post} path='/create_post' />
                   <Route Component={PostView} path='/post/:id' />
+                  <Route Component={Profile} path='/profile/:username'/>
                 </Routes>
               <Footer/>
           </PostsProvider>

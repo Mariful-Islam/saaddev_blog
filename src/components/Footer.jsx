@@ -2,9 +2,9 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='wrapper footer'>
-      Footer
-    </div>
+      <div className='dev_info'>
+        @ Developed By<a href='http://saaddev-io.web.app/' target='_blank' rel="noreferrer">SaadDev</a>
+      </div>
   )
 }
 

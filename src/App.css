@@ -1,7 +1,13 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 body {
   padding: 0;
   margin: 0;
   color: gray;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .wrapper {
@@ -63,6 +69,23 @@ form input {
     box-shadow: 0 0 0 0.1rem #11e4c1;
   }
 
+  textarea {
+      width: 100%;
+      height: 60px;
+
+    border-radius: 5px;
+    outline: #11e4c1;
+    border: 1px solid #11e4c1;
+    margin: 2px;
+    padding: 0 10px;
+    text-align: start;
+  }
+
+  textarea:focus {
+      outline: #11e4c1;
+    box-shadow: 0 0 0 0.1rem #11e4c1;
+  }
+
 .response {
     text-align: center;
 }
@@ -75,7 +98,12 @@ form input {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #dedede;
+    padding: 10px 5px;
+    border-radius: 7px;
+}
+
+.post_component:hover {
+    background-color: #d2d2d2;
 }
 
 .icon-tabler-trash-filled:hover {
@@ -87,8 +115,9 @@ form input {
 }
 
 .post {
-    margin: 20px 0;
+    margin: 10px 0;
     cursor: default;
+
 }
 
 .post h3, .post p {
@@ -106,6 +135,44 @@ form input {
     padding: 2px 5px;
     font-size: 0.8rem;
     border-radius: 20px;
+}
+
+/*Post view*/
+
+.post_view {
+    margin: 50px 0;
+}
+
+.post_view p {
+    margin: 0;
+}
+
+/*comment*/
+
+.comment p {
+    margin: 0;
+}
+
+.comment {
+    margin: 10px 0;
+}
+
+ /*
+ Footer*/
+.dev_info{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #d3d3d3;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px 0;
+}
+
+.dev_info a {
+    margin-left: 5px;
 }
 
 @media screen and (max-width: 600px) {
