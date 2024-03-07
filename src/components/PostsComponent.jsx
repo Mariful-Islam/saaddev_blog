@@ -34,7 +34,7 @@ const PostsComponent = ({post}) => {
         <div className='post_component' >
             <div className='post'>
                 <strong style={{fontSize:'0.8rem'}}><Link to={`/profile/${post.user}`}>@{post.user}</Link></strong><br/>
-                <h2><Link to={`/post/${post.id}`}>{post.title}</Link></h2>
+                <h3><Link to={`/post/${post.id}`}>{post.title}</Link></h3>
                 <p>
                    <div dangerouslySetInnerHTML={desc()} />
                 </p>
@@ -45,8 +45,9 @@ const PostsComponent = ({post}) => {
                     ))}
                 </div>
             </div>
-            <div onClick={()=>deleteHandle()}>
-                <svg className="icon icon-tabler icon-tabler-trash-filled" width="24"
+            <div>
+
+                <svg onClick={()=>deleteHandle()} className="icon icon-tabler icon-tabler-trash-filled" width="24"
                      height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                      stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>

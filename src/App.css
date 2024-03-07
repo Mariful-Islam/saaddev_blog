@@ -8,6 +8,7 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
+    font-size: 0.8rem;
 }
 
 .wrapper {
@@ -24,6 +25,7 @@ body {
 
 .nav {
   display: flex;
+    align-items: center;
   gap: 20px
 }
 
@@ -42,6 +44,24 @@ body {
   color: white;
   background-color: gray;
 }
+.icon-pen:hover {
+    fill: white;
+}
+
+.nav a.active .icon-pen{
+    fill: white;
+}
+
+/*POST*/
+
+.home {
+    margin-top:30px;
+}
+
+
+a {
+    color: gray;
+}
 
 
 /* Form  */
@@ -50,7 +70,6 @@ form {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-  margin-top: 50px;
   }
 
 form input {
@@ -91,15 +110,16 @@ form input {
 }
 
 .posts {
-
+    margin-bottom: 100px;
 }
 
 .post_component {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 5px;
+    padding: 0 5px;
     border-radius: 7px;
+    margin-bottom: 10px;
 }
 
 .post_component:hover {
@@ -115,13 +135,13 @@ form input {
 }
 
 .post {
-    margin: 10px 0;
+    margin: 5px 0;
     cursor: default;
 
 }
 
 .post h3, .post p {
-    margin: 7px 0;
+    margin: 5px 0;
 }
 
 .tag_list {
@@ -132,9 +152,10 @@ form input {
 .tag {
     background-color: gray;
     color: white;
-    padding: 2px 5px;
+    padding: 4px 7px;
     font-size: 0.8rem;
     border-radius: 20px;
+    font-size: 0.6rem;
 }
 
 /*Post view*/

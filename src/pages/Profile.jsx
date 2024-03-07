@@ -35,7 +35,16 @@ let Profile = () => {
 
     return (
         <div className='wrapper profile'>
-            <strong>{username}</strong>
+            <strong>
+                {username ?
+                username
+                :
+                <form onSubmit={(e)=>localStorage.setItem('username', e.target.username.value)}>
+                    <input type='text' name='username' placeholder='username'/>
+                    <input type='submit' value='Submit'/>
+                </form>
+                }
+            </strong>
             <h2>Your Posts</h2>
             {userPosts.map((post)=>(
                 <PostsComponent post={post}/>

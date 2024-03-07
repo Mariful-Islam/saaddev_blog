@@ -2,28 +2,71 @@ import React, {useEffect, useState, useContext} from 'react'
 import {Link} from "react-router-dom";
 import PostsComponent from "../components/PostsComponent";
 import PostsContext from "../context/PostContext";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
 
 
 const Home = () => {
 
-    let {getPosts, posts} = useContext(PostsContext)
+    const [page, setPage] = React.useState(1);
+    const handleChange = (event, value) => {
+            setPage(value);
+          };
+
+    let [posts, setPosts] = useState([])
+    let [count, setCount] = useState(0)
+    let getPosts = async () => {
+        let response = await fetch(`https://saaddev.pythonanywhere.com/blog/posts/?page=${page}`)
+        let data = await response.json()
+        setPosts(data.results)
+        setCount(data.count)
+    }
+
     useEffect(()=>{
         getPosts()
-    }, [])
+    },[page])
+
+    console.log(posts)
+
+
+    let [search, setSearch] = useState("")
+    let searchFilter = posts.filter((post)=>post.user.toLowerCase().includes(search.toLowerCase()) ||
+    post.title.toLowerCase().includes(search.toLowerCase()) || post.content.toLowerCase().includes(search.toLowerCase()) || post.tag.toLowerCase().includes(search.toLowerCase())
+    )
+
 
 
   return (
     <div className='wrapper home'>
-        <div style={{display:"flex", justifyContent:"flex-end"}}>
-            <Link to='/create_post'>
-                <svg width="25" height="25" viewBox="0 0 32.24800109863281 32.24800109863281" fill="#000000"><g><path d="M 21.172,21.172L 19.39,15.792L 9.11,5.512L 5.512,9.11L 15.792,19.39 zM 0.746,0.746c-0.994,0.994-0.994,2.604,0,3.598l 2.648,2.648l 3.598-3.598L 4.344,0.746 C 3.35-0.248, 1.74-0.248, 0.746,0.746zM 30,6L 15.822,6 l 2,2L 30,8 l0,22 L 8,30 L 8,17.822 l-2-2L 6,30 c0,1.104, 0.896,2, 2,2l 22,0 c 1.104,0, 2-0.896, 2-2L 32,8 C 32,6.896, 31.104,6, 30,6z"/></g></svg>
-            </Link>
+        <div style={{display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:20}}>
+            <form>
+                <input type='text' name='search' onChange={(e)=>setSearch(e.target.value)} placeholder='Search'/>
+            </form>
+            <strong>Total: {count}</strong>
         </div>
 
         <div className='posts'>
-          {posts.map((post, index)=>(
+          {
+              search.length === 0 ?
+                  posts.map((post, index)=>(
             <PostsComponent post={post} key={index}/>
-        ))}
+        ))
+                  :
+                  searchFilter.length === 0 ?
+                      <strong style={{display:"flex", justifyContent:"center"}}>Not Found</strong> :
+                  searchFilter.map((post, index)=>(
+            <PostsComponent post={post} key={index}/>
+        ))
+
+          }
+          <div style={{position:"fixed", bottom:45}}>
+              <Stack spacing={2}>
+                  <strong>Current Page : {page}</strong>
+                  <Pagination count={Math.ceil(count/3)} shape="rounded" page={page} onChange={handleChange}/>
+              </Stack>
+          </div>
+
         </div>
 
 

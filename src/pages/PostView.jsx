@@ -167,10 +167,8 @@ const PostView = () => {
                 ))}
                 {createComment}
                  <form onSubmit={(e)=>createCommentHandle(e)}>
-                     {username ?
-                         <strong>@{username}</strong>:
-                     <input type='text' name='user' placeholder='name'/>
-                     }
+
+                     <input type='text' name='user' value={username ? username : <></>} placeholder='name'/>
 
                     <textarea name='text' placeholder='Write Comment'/>
                     <input type='submit' value='Comment'/>
