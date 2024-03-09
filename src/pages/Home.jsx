@@ -50,13 +50,13 @@ const Home = () => {
           {
               search.length === 0 ?
                   posts.map((post, index)=>(
-            <PostsComponent post={post} key={index}/>
+            <PostsComponent post={post} key={index} getPosts={getPosts}/>
         ))
                   :
                   searchFilter.length === 0 ?
                       <strong style={{display:"flex", justifyContent:"center"}}>Not Found</strong> :
                   searchFilter.map((post, index)=>(
-            <PostsComponent post={post} key={index}/>
+            <PostsComponent post={post} key={index} getPosts={getPosts}/>
         ))
 
           }

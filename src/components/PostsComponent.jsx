@@ -3,10 +3,10 @@ import {useNavigate, Link} from "react-router-dom";
 import PostsContext from "../context/PostContext";
 
 
-const PostsComponent = ({post}) => {
+const PostsComponent = ({post, getPosts}) => {
     const navigate = useNavigate()
 
-    let {getPosts, posts} = useContext(PostsContext)
+    let {posts} = useContext(PostsContext)
 
 
 
