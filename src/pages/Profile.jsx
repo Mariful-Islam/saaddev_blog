@@ -5,6 +5,7 @@ import PostsComponent from "../components/PostsComponent";
 
 let Profile = () => {
     let {username} = useParams()
+    let [settedUsername, setSettedUsername] = useState("")
     // let username = localStorage.getItem('username')
 
     const navigate = useNavigate()
@@ -33,16 +34,32 @@ let Profile = () => {
 
 
 
+    useEffect(()=>{
+        getUsername()
+    }, [settedUsername])
+
+    let getUsername = () => {
+        setSettedUsername(localStorage.getItem('username'))
+    }
+
+    let setUsername = (e) => {
+        e.preventDefault()
+        localStorage.setItem('username', e.target.username.value)
+        getUsername()
+        getUserPosts()
+        getComments()
+    }
+
     return (
         <div className='wrapper profile'>
             <strong>
-                {username ?
-                username
-                :
-                <form onSubmit={(e)=>localStorage.setItem('username', e.target.username.value)}>
-                    <input type='text' name='username' placeholder='username'/>
-                    <input type='submit' value='Submit'/>
-                </form>
+                { !settedUsername ?
+                    <form onSubmit={(e)=>setUsername(e)}>
+                        <input type='text' name='username' placeholder='username'/> <br />
+                        <input type='submit' value='Submit'/>
+                    </form> 
+                    :
+                    username
                 }
             </strong>
             <h2>Your Posts</h2>

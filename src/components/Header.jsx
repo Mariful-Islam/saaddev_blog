@@ -1,12 +1,13 @@
 import React from 'react'
-import {Link, NavLink} from "react-router-dom";;
+import {Link, NavLink, useNavigate} from "react-router-dom";;
 
 
 const Header = () => {
     let username = localStorage.getItem('username')
+    let navigate = useNavigate()
   return (
     <div className='wrapper header'>
-        <h1>Blog - Saad Dev</h1>
+        <h1 onClick={()=>navigate('/')} style={{cursor: 'default'}}>Blog - Saad Dev</h1>
         <div className='nav'>
             <NavLink to='/'>Home</NavLink>
             <NavLink to={`/profile/${username}`}>Profile</NavLink>

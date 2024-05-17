@@ -8,6 +8,8 @@ const PostsComponent = ({post, getPosts}) => {
 
     let {posts} = useContext(PostsContext)
 
+    let username = localStorage.getItem('username')
+
 
 
     function desc() {
@@ -18,7 +20,8 @@ const PostsComponent = ({post, getPosts}) => {
 
     let [postRes, setPostRes] = useState('')
 
-    let deleteHandle = async () => {
+    let deleteHandle = async (e) => {
+        e.preventDefault()
         let response = await fetch(`https://saaddev.pythonanywhere.com/blog/post_delete/${post.id}/`, {
             method: "DELETE",
             headers:{
@@ -32,7 +35,7 @@ const PostsComponent = ({post, getPosts}) => {
 
     return(
         <div className='post_component' >
-            <div className='post'>
+            <div className='post_content'>
                 <strong style={{fontSize:'0.8rem'}}><Link to={`/profile/${post.user}`}>@{post.user}</Link></strong><br/>
                 <h3><Link to={`/post/${post.id}`}>{post.title}</Link></h3>
                 <p>
@@ -46,8 +49,9 @@ const PostsComponent = ({post, getPosts}) => {
                 </div>
             </div>
             <div>
+                { username === post.user ?
 
-                <svg onClick={()=>deleteHandle()} className="icon icon-tabler icon-tabler-trash-filled" width="24"
+                <svg onClick={deleteHandle} className="icon icon-tabler icon-tabler-trash-filled" width="24"
                      height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                      stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -57,7 +61,10 @@ const PostsComponent = ({post, getPosts}) => {
                     <path
                         d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z"
                         stroke-width="0" fill="currentColor"/>
-                </svg>
+                </svg>:
+                <></>
+}
+
             </div>
         </div>
     )

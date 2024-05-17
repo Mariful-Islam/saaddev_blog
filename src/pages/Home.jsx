@@ -17,10 +17,10 @@ const Home = () => {
     let [posts, setPosts] = useState([])
     let [count, setCount] = useState(0)
     let getPosts = async () => {
-        let response = await fetch(`https://saaddev.pythonanywhere.com/blog/posts/?page=${page}`)
+        let response = await fetch(`https://saaddev.pythonanywhere.com/blog/posts/`)
         let data = await response.json()
-        setPosts(data.results)
-        setCount(data.count)
+        setPosts(data)
+        setCount(data.length)
     }
 
     useEffect(()=>{
@@ -43,7 +43,11 @@ const Home = () => {
             <form>
                 <input type='text' name='search' onChange={(e)=>setSearch(e.target.value)} placeholder='Search'/>
             </form>
-            <strong>Total: {count}</strong>
+            { search.length === 0 ?
+                <strong>Total: {count}</strong> :
+                <strong>Total: {searchFilter.length}</strong>
+            }
+            
         </div>
 
         <div className='posts'>
@@ -60,12 +64,7 @@ const Home = () => {
         ))
 
           }
-          <div style={{position:"fixed", bottom:45}}>
-              <Stack spacing={2}>
-                  <strong>Current Page : {page}</strong>
-                  <Pagination count={Math.ceil(count/3)} shape="rounded" page={page} onChange={handleChange}/>
-              </Stack>
-          </div>
+
 
         </div>
 
