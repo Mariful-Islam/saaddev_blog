@@ -4,7 +4,8 @@ import PostsComponent from "../components/PostsComponent";
 import PostsContext from "../context/PostContext";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-
+import Front from '../components/Front';
+import Idea from '../components/Idea';
 
 
 const Home = () => {
@@ -38,34 +39,49 @@ const Home = () => {
 
 
   return (
-    <div className='wrapper home'>
-        <div style={{display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:20}}>
+    <div className='home'>
+        <div className='search wrapper'>
             <form>
                 <input type='text' name='search' onChange={(e)=>setSearch(e.target.value)} placeholder='Search'/>
             </form>
+            <div>
+                {
+                    search.length === 0 ?<></>:
+           
+                        searchFilter.length === 0 ?
+                            <strong style={{display:"flex", justifyContent:"center"}}>Not Found</strong> 
+                            :
+                        searchFilter.map((post, index)=>(
+                            <div style={{position: 'absolute', height:400, overflowY: 'auto'}}>
+                                <PostsComponent post={post} key={index} getPosts={getPosts}/>
+                            </div>
+                            ))
+
+                }
+            </div>
+        </div>
+        <div>
+            <Front/>
+        </div>
+        
+        <div>
             { search.length === 0 ?
                 <strong>Total: {count}</strong> :
                 <strong>Total: {searchFilter.length}</strong>
             }
-            
         </div>
 
-        <div className='posts'>
+        <div className='posts wrapper'>
           {
-              search.length === 0 ?
                   posts.map((post, index)=>(
             <PostsComponent post={post} key={index} getPosts={getPosts}/>
-        ))
-                  :
-                  searchFilter.length === 0 ?
-                      <strong style={{display:"flex", justifyContent:"center"}}>Not Found</strong> :
-                  searchFilter.map((post, index)=>(
-            <PostsComponent post={post} key={index} getPosts={getPosts}/>
-        ))
-
+                  ))
           }
 
 
+        </div>
+        <div>
+            <Idea/>
         </div>
 
 

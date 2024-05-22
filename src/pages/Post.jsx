@@ -50,9 +50,10 @@ const Post = () => {
                     <CKEditor editor={ClassicEditor}
                               onChange={(event, editor) => setContent(editor.getData())}
                               
+                              
                     /> <br/>
                     <input type='text' name='tag' placeholder='Tag, write separated with comma'/><br/>
-                    <input type='submit' value='Post'/>
+                    <button type='submit' className='fill_btn' style={{height:40, width:130}}>Post</button>
                 </form>
             }
         </div>
