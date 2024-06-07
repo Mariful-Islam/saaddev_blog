@@ -10,12 +10,14 @@ const Header = () => {
         <h1 onClick={()=>navigate('/')} style={{cursor: 'default'}}>Blog</h1>
         <div className='nav'>
             <NavLink to='/'>Home</NavLink>
-            <NavLink to={`/profile/${username}`}>Profile</NavLink>
+            {username ? 
+            <NavLink to={`/profile/${username}`}>Profile</NavLink> :
+            <></>
+}
             <NavLink to={'/create_post'}>
                 Write
             </NavLink>
-            <NavLink to='/signup'>Sign Up</NavLink>
-            <NavLink to='/login'>Login</NavLink>
+            <button className='fill_btn' style={{height:40, width:150}}>Subscribe</button>
         </div>
 
     </div>

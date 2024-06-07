@@ -42,7 +42,7 @@ const Post = () => {
                 <div className='response'>{postRes}</div>
                 :
                 <form method='POST' onSubmit={postHandle}>
-                    { username.length === 0 ?
+                    { username?.length === 0 ?
                         <input type='text' name='username' placeholder='username' />:
                         <input type='text' name='username' value={username} placeholder='username' style={{display:'none'}}/>
                     } <br/>

@@ -33,19 +33,34 @@ const PostsComponent = ({post, getPosts}) => {
         getPosts()
     }
 
+    function extractTextFromHTML(html) {
+        // Parse the HTML content
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(html, 'text/html');
+        
+        // Extract text content
+        return doc.body.textContent || "";
+      }
+
     return(
         <div className='post_component' >
             <div className='post_content'>
-                
-                <h3><Link to={`/post/${post.id}`}>{post.title}</Link></h3>
                 <div>
-                    <Link to={`/profile/${post.user}`} style={{fontSize:'0.8rem'}}>@{post.user}</Link><br/>
-                    <p>{TimeFormat(post.updated)}</p>
+                    <h3><Link to={`/post/${post.id}`}>{post.title}</Link></h3>
                 </div>
-                <div className='tag_list'>
-                    {tag.map((t)=>(
-                        <p className='tag'>{t}</p>
-                    ))}
+                <div>
+                    <p style={{textAlign: "justify"}}>{extractTextFromHTML(post.content).slice(0,200)}</p>
+                </div>
+                <div>
+                    <div>
+                        <Link to={`/profile/${post.user}`} style={{fontSize:'0.8rem'}}>@{post.user}</Link><br/>
+                        <p>{TimeFormat(post.updated)}</p>
+                    </div>
+                    <div className='tag_list'>
+                        {tag.map((t)=>(
+                            <p className='tag'>{t}</p>
+                        ))}
+                </div>
                 </div>
             </div>
 

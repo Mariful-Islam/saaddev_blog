@@ -41,9 +41,9 @@ const Home = () => {
   return (
     <div className='home'>
         <div className='search wrapper'>
-            <form>
+            {/* <form>
                 <input type='text' name='search' onChange={(e)=>setSearch(e.target.value)} placeholder='Search'/>
-            </form>
+            </form> */}
             <div>
                 {
                     search.length === 0 ?<></>:
@@ -64,7 +64,7 @@ const Home = () => {
             <Front/>
         </div>
         
-        <div>
+        <div className='wrapper'>
             { search.length === 0 ?
                 <strong>Total: {count}</strong> :
                 <strong>Total: {searchFilter.length}</strong>
