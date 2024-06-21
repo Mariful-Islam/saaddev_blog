@@ -53,12 +53,12 @@ const PostsComponent = ({post, getPosts}) => {
                 </div>
                 <div>
                     <div>
-                        <Link to={`/profile/${post.user}`} style={{fontSize:'0.8rem'}}>@{post.user}</Link><br/>
+                        <Link to={`/profile/${post.user}`}>@{post.user}</Link><br/>
                         <p>{TimeFormat(post.updated)}</p>
                     </div>
                     <div className='tag_list'>
-                        {tag?.map((t)=>(
-                            <p className='tag'>{t}</p>
+                        {tag?.map((t, i)=>(
+                            <p className='tag' key={i}>{t}</p>
                         ))}
                 </div>
                 </div>
