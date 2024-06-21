@@ -9,7 +9,7 @@ const Front = () => {
             Share your <span>knowledge</span> 
         </div>
         <div className='sig_btn'>
-            <button className='fill_btn' onClick={()=>navigate('/signup')}>Write</button>
+            <button className='fill_btn' onClick={()=>navigate('/create_post')}>Write</button>
         </div>
     </div>
   )

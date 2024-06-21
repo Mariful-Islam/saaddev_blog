@@ -98,7 +98,7 @@ const PostView = () => {
                 <div className='post'>
                     <div style={{display:"flex", justifyContent:"flex-start", alignItems:"center", gap:50}}>
                         <strong style={{fontSize:'0.8rem', cursor: 'default'}} onClick={()=>navigate(`/profile/${postView.user}`)} >@{postView.user}</strong><br/>
-                        { username === postView.user ? 
+                        { username === postView?.user ? 
                             <>
                                 <svg className="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24"
                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -125,7 +125,7 @@ const PostView = () => {
                 
                     </div>
 
-                    <h2>{postView.title}</h2>
+                    <h2>{postView?.title}</h2>
                     <p>
                        <div dangerouslySetInnerHTML={content()} />
                     </p>
@@ -136,13 +136,13 @@ const PostView = () => {
                 </div>
             </div>
             <div className='comment_list'>
-                {comments.map((comment)=>(
+                {comments?.map((comment)=>(
                      <div style={{display:"flex", alignItems:"flex-start", justifyContent:"space-between"}}>
                         <div className='comment'>
-                            <strong style={{fontSize:'0.8rem'}} onClick={(e)=>navigate(`/profile/${comment.user}`)}>@{comment.user}</strong>
-                            <p>{comment.text}</p>
+                            <strong style={{fontSize:'0.8rem'}} onClick={(e)=>navigate(`/profile/${comment?.user}`)}>@{comment.user}</strong>
+                            <p>{comment?.text}</p>
                         </div>
-                        { username === comment.user ?
+                        { username === comment?.user ?
                         <div style={{display:"flex", gap: 20}}>
                             <svg className="icon icon-tabler icon-tabler-pencil" width="20" height="20" viewBox="0 0 24 24"
                                          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

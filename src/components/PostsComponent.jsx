@@ -57,7 +57,7 @@ const PostsComponent = ({post, getPosts}) => {
                         <p>{TimeFormat(post.updated)}</p>
                     </div>
                     <div className='tag_list'>
-                        {tag.map((t)=>(
+                        {tag?.map((t)=>(
                             <p className='tag'>{t}</p>
                         ))}
                 </div>

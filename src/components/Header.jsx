@@ -17,7 +17,7 @@ const Header = () => {
             <NavLink to={'/create_post'}>
                 Write
             </NavLink>
-            <button className='fill_btn' style={{height:40, width:150}}>Subscribe</button>
+            <button className='fill_btn' style={{height:30, width:120, fontSize: '0.85rem'}}>Subscribe</button>
         </div>
 
     </div>

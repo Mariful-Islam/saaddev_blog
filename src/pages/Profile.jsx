@@ -70,7 +70,7 @@ let Profile = () => {
             <div className="post_history">
                 <h2><img src={history} alt=""/>Your Posts</h2>
                 <div className="posts">
-                    {userPosts.map((post)=>(
+                    {userPosts?.map((post)=>(
                         <PostsComponent post={post}/>
                     ))}
                 </div>
@@ -78,7 +78,7 @@ let Profile = () => {
             <div className="activity">
                 <h2><img src={history} alt=""/>Your Activity</h2>
                 <div>
-                    {comments.map((comment)=>(
+                    {comments?.map((comment)=>(
                         <p>You commented <strong>{comment.text}</strong> on <Link to={`/post/${comment.post_id}`}>{comment.post_title}</Link></p>
                     ))}
 
