@@ -3,6 +3,8 @@ import {useNavigate, Link, useParams} from "react-router-dom"
 import PostsComponent from "../components/PostsComponent";
 import user from '../assets/images/user.jpg'
 import history from '../assets/images/history.png'
+import { Hidden } from "@mui/material";
+import { height } from "@mui/system";
 
 
 let Profile = () => {

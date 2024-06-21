@@ -34,11 +34,10 @@ const PostsComponent = ({post, getPosts}) => {
     }
 
     function extractTextFromHTML(html) {
-        // Parse the HTML content
+
         let parser = new DOMParser();
         let doc = parser.parseFromString(html, 'text/html');
         
-        // Extract text content
         return doc.body.textContent || "";
       }
 
@@ -58,7 +57,7 @@ const PostsComponent = ({post, getPosts}) => {
                     </div>
                     <div className='tag_list'>
                         {tag?.map((t, i)=>(
-                            <p className='tag' key={i}>{t}</p>
+                            <Link className='tag' key={i} to={`/search/${t}`}>{t}</Link>
                         ))}
                 </div>
                 </div>

@@ -10,6 +10,7 @@ import PostView from "./pages/PostView";
 import Footer from "./components/Footer";
 import Profile from './pages/Profile';
 import {PostsProvider} from "./context/PostContext";
+import SearchPage from './pages/SearchPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                   <Route Component={Post} path='/create_post' />
                   <Route Component={PostView} path='/post/:id' />
                   <Route Component={Profile} path='/profile/:username'/>
+                  <Route Component={SearchPage} path='/search/:keyword'/>
                 </Routes>
               <Footer/>
           </PostsProvider>

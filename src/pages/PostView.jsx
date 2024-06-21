@@ -9,13 +9,16 @@ const PostView = () => {
     let navigate = useNavigate()
     let username = localStorage.getItem('username')
 
-
-
     let [postView, setPostView] = useState("")
     let getPostView = async () => {
-        let response = await fetch(`https://saaddev.pythonanywhere.com/blog/post/${id}/`)
-        let data = await response.json()
-        setPostView(data)
+        try {
+            let response = await fetch(`https://saaddev.pythonanywhere.com/blog/post/${id}/`)
+            let data = await response.json()
+            setPostView(data)
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
     useEffect(() => {
         getPostView()
@@ -31,24 +34,33 @@ const PostView = () => {
 
     let onDelete = async (e) => {
         e.preventDefault()
-        let response = await fetch(`https://saaddev.pythonanywhere.com/blog/post_delete/${id}/`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        let data = await response.json()
-        setRes(data)
-        getPosts()
-        navigate('/')
+        try {
+            let response = await fetch(`https://saaddev.pythonanywhere.com/blog/post_delete/${id}/`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            let data = await response.json()
+            setRes(data)
+            getPosts()
+            navigate('/')
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
     let [comments, setComments] = useState([])
     let getComments = async () => {
-        let response = await fetch(`https://saaddev.pythonanywhere.com/blog/comment/${id}/`)
-        let data = await response.json()
-        setComments(data)
-        console.log(data)
+        try {
+            let response = await fetch(`https://saaddev.pythonanywhere.com/blog/comment/${id}/`)
+            let data = await response.json()
+            setComments(data)
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
     useEffect(() => {
@@ -59,37 +71,44 @@ const PostView = () => {
 
     let createCommentHandle = async (e) => {
         e.preventDefault()
-        let response = await fetch(`https://saaddev.pythonanywhere.com/blog/post_comment/`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ 'post_id': id, 'user': username, 'text': e.target.text.value })
-        })
-        let data = await response.json()
-        setCreateComment(data)
-        getComments()
-        e.target.reset()
+        try {
+            let response = await fetch(`https://saaddev.pythonanywhere.com/blog/post_comment/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ 'post_id': id, 'user': e.target.username.value, 'text': e.target.text.value })
+            })
+            let data = await response.json()
+            setCreateComment(data)
+            getComments()
+            { username ? <></> : localStorage.setItem('username', e.target.username.value) }
+
+            e.target.reset()
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
     let [dltRes, setDltRes] = useState('')
 
     let deleteHandle = async (e, id) => {
         e.preventDefault()
-        let response = await fetch(`https://saaddev.pythonanywhere.com/blog/delete_comment/${id}/`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        let data = await response.json()
-        setDltRes(data)
-        getComments()
+        try {
+            let response = await fetch(`https://saaddev.pythonanywhere.com/blog/delete_comment/${id}/`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            let data = await response.json()
+            setDltRes(data)
+            getComments()
+        } catch (error) {
+            console.log(error)
+        }
     }
-
-
-    let tag = postView.tag_list
-    console.log(tag)
 
 
     return (
@@ -97,7 +116,7 @@ const PostView = () => {
             <div className='post_view'>
                 <div className='post'>
                     <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: 50 }}>
-                        <strong style={{ fontSize: '0.8rem', cursor: 'default' }} onClick={() => navigate(`/profile/${postView.user}`)} >@{postView.user}</strong><br />
+                        <strong style={{ cursor: 'pointer' }} onClick={() => navigate(`/profile/${postView.user}`)} >@{postView.user}</strong><br />
                         {username === postView?.user ?
                             <>
                                 <svg className="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24"
@@ -136,10 +155,11 @@ const PostView = () => {
                 </div>
             </div>
             <div className='comment_list'>
+                <h2>Comments</h2>
                 {comments?.map((comment, index) => (
                     <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
                         <div className='comment'>
-                            <strong style={{ fontSize: '0.8rem' }} onClick={(e) => navigate(`/profile/${comment?.user}`)}>@{comment.user}</strong>
+                            <strong style={{cursor: 'pointer'}} onClick={(e) => navigate(`/profile/${comment?.user}`)}>@{comment.user}</strong>
                             <p>{comment?.text}</p>
                         </div>
                         {username === comment?.user ?
@@ -165,15 +185,18 @@ const PostView = () => {
                             <></>}
                     </div>
                 ))}
+
+                <h3>Write Comment on this Post</h3>
                 {createComment}
                 <form onSubmit={(e) => createCommentHandle(e)}>
-                    {username ?
-                        <input type='text' name='user' placeholder='name' /> :
-                        <input type='text' name='user' value={username} placeholder='name' style={{ display: 'none' }} />
+                    {
+                        !username ?
+                            <input type='text' name='username' placeholder='name' className='form_input' /> :
+                            <input type='text' name='username' value={username} placeholder='name' style={{ display: 'none' }} />
                     }
 
-                    <textarea name='text' placeholder='Write Comment' />
-                    <input type='submit' value='Comment' />
+                    <textarea name='text' placeholder='Write Comment' className='form_input' />
+                    <input type='submit' value='Comment' className='fill_btn' style={{height:35, width:100, fontSize: '1rem'}} />
                 </form>
 
             </div>
